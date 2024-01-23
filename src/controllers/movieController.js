@@ -20,7 +20,22 @@ movieRouter.get('/:movieId/details', (req, res) => {
     const movieId = req.params.movieId
     let movie = movieManager.getOne(movieId)
     res.render('details', {movie})
+
+ 
+    if(!movie){
+     return res.redirect('/404')
+    }
+ 
+     res.render('details', {...cube})
+
 })
+
+movieRouter.get('/search', (req, res) => {
+    const {title, genre, year} = req.query
+    movies = movieManager.getAll(title, genre, year)
+        res.render('search', {movies, title, genre, year})
+})
+
 
 
 module.exports = movieRouter
