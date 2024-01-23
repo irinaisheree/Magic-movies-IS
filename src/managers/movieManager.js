@@ -6,7 +6,7 @@ const movies = [
         title : 'Fight Club',
         genre: "action",
         description : 'best movie ever',
-        imageUrl : "https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
+        poster : "https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
         director : "David Fincher",
         year : 1999,
         rating: 8
@@ -17,7 +17,7 @@ const movies = [
         title : 'The Shawshak Redemption',
         genre: "drama",
         description : 'awesome movie',
-        imageUrl : "https://m.media-amazon.com/images/I/815qtzaP9iL._AC_UF894,1000_QL80_.jpg",
+        poster : "https://m.media-amazon.com/images/I/815qtzaP9iL._AC_UF894,1000_QL80_.jpg",
         director : "Stephen King",
         year : 1994,
         rating: 9
@@ -27,7 +27,7 @@ const movies = [
         title : 'The Matrix',
         genre: "action",
         description : 'super nice movie',
-        imageUrl : "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg",
+        poster : "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg",
         director : "Lilly Wachowski",
         year : 1999,
         rating: 8
