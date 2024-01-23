@@ -45,7 +45,7 @@ exports.create = (movieData) => {
         id: uniqid(),
         ...movieData
      }
- cubes.push(newMovie)
+ movies.push(newMovie)
 
  return newMovie 
 
