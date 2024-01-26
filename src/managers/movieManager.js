@@ -1,7 +1,7 @@
-const Movie = require('../models/Movie')
+const Movie = require('../models/Movie');
 
 
-const uniqid = require('uniqid')
+const uniqid = require('uniqid');
 const movies = [
     {
         id : uniqid(),
@@ -36,9 +36,13 @@ const movies = [
     }
 ]
 
-exports.getAll = (title, genre, year) => {
-    let result = movies.slice()
+exports.getAll = () => Movie.find();
 
+//TODO: Filter result in MongoDB
+
+exports.search = async (title, genre, year) => {
+
+        let result = await Movie.find().lean()
     if(title){
 
         result = result.filter(movie => movie.title.toLowerCase().includes(title.toLowerCase()))
@@ -55,12 +59,10 @@ exports.getAll = (title, genre, year) => {
     return result
 }
  
-exports.getOne = (movieId) => movies.find(x => x.id === movieId)
+exports.getOne = (movieId) => Movie.findById(movieId)
+
+   
 
 
-exports.create = async (movieData) => {
-    const result = await Movie.create(movieData)
-
-    return result
-
-}
+exports.create =  (movieData) => Movie.create(movieData)
+ 

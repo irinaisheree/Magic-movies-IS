@@ -8,6 +8,7 @@ const movieSchema = new mongoose.Schema({
     genre : {
         type: String,
         required : true,
+    
     },
     director : {
         type: String,
@@ -33,7 +34,7 @@ const movieSchema = new mongoose.Schema({
     poster: {
         type: String,
         required: true,
-        match: /^https?/
+        match: /^https?:\/\//
     }
 })
 

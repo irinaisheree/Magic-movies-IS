@@ -18,23 +18,21 @@ movieRouter.post('/create', async (req, res) => {
    }
 })
 
-movieRouter.get('/:movieId/details', (req, res) => {
+movieRouter.get('/details/:movieId', async (req, res) => {
     const movieId = req.params.movieId
-    let movie = movieManager.getOne(movieId)
+    try{let movie = await movieManager.getOne(movieId).lean()
     res.render('details', {movie})
-
- 
-    if(!movie){
-     return res.redirect('/404')
-    }
- 
-     res.render('details', {...cube})
-
+} catch(error){
+    console.log(error.message)
+}
+    
 })
+ 
+
 
 movieRouter.get('/search', (req, res) => {
     const {title, genre, year} = req.query
-    movies = movieManager.getAll(title, genre, year)
+    movies = movieManager.search(title, genre, year)
         res.render('search', {movies, title, genre, year})
 })
 
