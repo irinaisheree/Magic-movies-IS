@@ -18,7 +18,9 @@ const PORT = 5000
 app.use(router)
 app.use(movieRouter)
 
-mongoose.connect(`mongodb://localhost:27017/movies`).then(()=> console.log(`DB connected`))
+mongoose.connect(`mongodb://127.0.0.1:27017/magic-movies`).then(()=>{ console.log(`DB connected`)
 
-     app.listen(PORT, () => 
+app.listen(PORT, () => 
     console.log(`Server is listening on port ${PORT}...`))
+
+}).catch(err => console.log(`Cannot connect to DB`))
