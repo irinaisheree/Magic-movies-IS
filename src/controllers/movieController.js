@@ -21,7 +21,8 @@ movieRouter.post('/create', async (req, res) => {
 movieRouter.get('/details/:movieId', async (req, res) => {
     const movieId = req.params.movieId
     try{let movie = await movieManager.getOne(movieId).lean()
-    res.render('details', {movie})
+    
+        res.render('details', {movie})
 } catch(error){
     console.log(error.message)
 }
