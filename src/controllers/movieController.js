@@ -1,6 +1,7 @@
 const movieRouter = require('express').Router()
 
 const movieManager = require('../managers/movieManager')
+const castManager = require('../managers/castManager')
 
 movieRouter.get('/create', (req, res) => {
     res.render('create')
@@ -39,7 +40,8 @@ movieRouter.get('/search', (req, res) => {
 
 movieRouter.get('/details/:movieId/attach', async(req, res) => {
     const movie = await movieManager.getOne(req.params.movieId).lean()
-    res.render('movie/attach', { ...movie })
+    const casts = await castManager.getAll().lean()
+    res.render('movie/attach', { ...movie, casts})
 
 })
 
