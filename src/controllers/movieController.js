@@ -37,8 +37,9 @@ movieRouter.get('/search', (req, res) => {
         res.render('search', {movies, title, genre, year})
 })
 
-movieRouter.get('/details/:movieId/attach', (req, res) => {
-    res.render('movie/attach')
+movieRouter.get('/details/:movieId/attach', async(req, res) => {
+    const movie = await movieManager.getOne(req.params.movieId).lean()
+    res.render('movie/attach', { ...movie })
 
 })
 
