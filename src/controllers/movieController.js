@@ -21,8 +21,9 @@ movieRouter.post('/create', async (req, res) => {
 
 movieRouter.get('/movies/:movieId/details', async (req, res) => {
     const movieId = req.params.movieId
-    try{let movie = await movieManager.getOne(movieId).lean()
-    
+    try{
+        let movie = await movieManager.getOne(movieId).lean()
+    // const casts = await castManager.getByIds(movie.casts).lean()
         res.render('details', {movie})
 } catch(error){
     console.log(error.message)
@@ -41,22 +42,19 @@ movieRouter.get('/search', (req, res) => {
 movieRouter.get('/movies/:movieId/attach', async(req, res) => {
     const movie = await movieManager.getOne(req.params.movieId).lean()
     const casts = await castManager.getAll().lean()
+
     res.render('movie/attach', { ...movie, casts})
 
 })
 
 movieRouter.post('/movies/:movieId/attach', async(req, res) => {
     const castId = req.body.cast
+    await movieManager.attach(req.params.movieId, castId)
 
-    const movie = await movieManager.getOne(req.params.movieId)
-    movie.casts.push(castId)
-    console.log(movie)
-    console.log(castId)
-
-    await movie.save()
+ 
    res.redirect(`/movies/${req.params.movieId}/attach`)
 })
-
+   
 
 
 module.exports = movieRouter
