@@ -33,9 +33,9 @@ movieRouter.get('/movies/:movieId/details', async (req, res) => {
  
 
 
-movieRouter.get('/search', (req, res) => {
+movieRouter.get('/search', async (req, res) => {
     const {title, genre, year} = req.query
-    movies = movieManager.search(title, genre, year)
+    movies =await movieManager.search(title, genre, year).lean()
         res.render('search', {movies, title, genre, year})
 })
 
