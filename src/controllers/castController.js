@@ -11,7 +11,7 @@ castRouter.post('/create', async (req,res) => {
     const castData = req.body
     
     await castManager.create(castData)
-    res.redirect('/')
+    res.redirect('/movies/:movieId/attach')
 })
 
 module.exports = castRouter
