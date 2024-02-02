@@ -2,7 +2,7 @@ const router = require("express").Router()
 const movieManager = require("../managers/movieManager")
 const castRouter = require("./castController")
 const movieRouter = require('./movieController')
-
+const authRouter = require('./authController')
     
 router.get("/", async(req, res) => {
     const movies = await movieManager.getAll().lean()
@@ -19,9 +19,10 @@ router.get('/404', (req, res) => {
 
 router.use(movieRouter)
 router.use('/cast', castRouter)
+// router.use('/auth', authRouter)
 
-router.get('*', (req, res) => {
-    res.status(404).render('404')
-})
+// router.get('*', (req, res) => {
+//     res.status(404).render('404')
+// })
 
 module.exports = router
