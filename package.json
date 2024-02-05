@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/irinaisheree/Magic-movies-IS#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "express": "^4.18.2",
     "express-handlebars": "^7.1.2",
     "mongoose": "^8.1.1",

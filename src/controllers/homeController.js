@@ -19,10 +19,10 @@ router.get('/404', (req, res) => {
 
 router.use(movieRouter)
 router.use('/cast', castRouter)
-router.use('/auth', authRouter)
+// router.use('/auth', authRouter)
 
-router.get('*', (req, res) => {
-    res.status(404).render('404')
-})
+// router.get('*', (req, res) => {
+//     res.status(404).render('404')
+// })
 
 module.exports = router

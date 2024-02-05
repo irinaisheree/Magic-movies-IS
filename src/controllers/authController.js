@@ -9,7 +9,7 @@ router.get('/register', (req, res) => {
 router.post('/register', async(req, res) => {
     const userData = req.body
 
-    await authManager.register(userData)
+    await authManager.register(userData);
 
     res.redirect('/auth/login')
 })
