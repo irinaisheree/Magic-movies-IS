@@ -2,33 +2,33 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('../lib/jwt')
 
-const SECRET = 'dfhgjhjdhfzdgxfhhituy5654uhfg'
+const { SECRET } = require('../config/config')
 
 exports.register = (userData) =>User.create(userData)
 
+exports.login = async (email, password) => {
+    // Get user from db
+    const user = await User.findOne({ email });
 
-exports.login = async(email, password) => {
-    //get user from db
-    const user = await User.findOne({email})
-
-    //check if user exists
-    if(!user) {
-        throw new Error ('Cannot find username or password')
+    // Check if user exists
+    if (!user) {
+        throw new Error('Cannot find email or password');
     }
 
-    //check if password is valid
-  const isValid = await bcrypt.compare(password, user.password)
+    // Check if password is valid
+    const isValid = await bcrypt.compare(password, user.password);
+    if (!isValid) {
+        throw new Error('Cannot find email or password');
+    }
 
-  if(!isValid){
-    throw new Error('Cannot find username or password')
-  }
+    // Generate jwt token
+    const payload = {
+        _id: user._id,
+        email: user.email,
+    };
 
-  //generate jwt token(install jsonwebtoken)
-  const payload = {
-    _id : user._id,
-    email : user.email
-  }
-  const token = await jwt.sign(payload, SECRET, {expiresIn : '2h'})
+    const token = await jwt.sign(payload, SECRET, { expiresIn: '2h' });
 
-  return token
+    // return token
+    return token;
 }
