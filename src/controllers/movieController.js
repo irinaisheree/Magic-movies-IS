@@ -54,6 +54,10 @@ movieRouter.post('/movies/:movieId/attach', async(req, res) => {
  
    res.redirect(`/movies/${req.params.movieId}/attach`)
 })
+
+movieRouter.get('/movies/:movieId/edit', (req, res) => {
+    res.render('movie/edit')
+})
    
 
 
