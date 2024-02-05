@@ -19,9 +19,10 @@ router.get('/login', (req, res) => {
 })
 
 router.post('/login', async(req, res) => {
-    const userData = req.body
-    await authManager.login(userData)
+    const {email, password} = req.body
+   const token =  await authManager.login(email, password)
 
+   console.log(token)
     res.redirect('/')
 })
 
