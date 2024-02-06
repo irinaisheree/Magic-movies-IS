@@ -27,9 +27,10 @@ movieRouter.post('/create', isAuth, async (req, res) => {
 movieRouter.get('/movies/:movieId/details', async (req, res) => {
     const movieId = req.params.movieId
     try{
-        let movie = await movieManager.getOne(movieId).lean()
+        const movie = await movieManager.getOne(movieId).lean()
+        const isOwner = movie.owner == req.user._id//movie.owner(object) ==  req.user._id(string) (convirts them to the same type)
     // const casts = await castManager.getByIds(movie.casts).lean()
-        res.render('movie/details', {movie})
+        res.render('movie/details', {movie, isOwner})
 } catch(error){
     console.log(error.message)
 }
