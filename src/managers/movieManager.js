@@ -46,3 +46,6 @@ exports.attach = (movieId, castId) => {
 //    return movie.save()
 }
  
+
+exports.delete = (movieId) => Movie.findByIdAndDelete(movieId)
+exports.edit = (movieId, movieData) => Movie.findByIdAndUpdate(movieId, movieData)
