@@ -14,6 +14,7 @@ exports.auth = async (req, res, next) => {
 
         //attach the decoded token object to the user property of the req object
         req.user = decodedToken
+        res.locals.isAuthenticated = true
         next()
     }catch{
         res.clearCookie('auth')
@@ -28,3 +29,4 @@ exports.isAuth = (req, res, next) => {
     }
     next()
 }
+
