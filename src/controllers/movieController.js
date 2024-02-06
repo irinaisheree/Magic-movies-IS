@@ -2,16 +2,21 @@ const movieRouter = require('express').Router()
 
 const movieManager = require('../managers/movieManager')
 const castManager = require('../managers/castManager')
+const { isAuth } = require('../middlewares/authMiddleware')
 
-movieRouter.get('/create', (req, res) => {
+movieRouter.get('/create', isAuth,(req, res) => {
     res.render('create')
 })
 
-movieRouter.post('/create', async (req, res) => {
+movieRouter.post('/create', isAuth, async (req, res) => {
    console.log(req.body)
+   const newMovie = {
+    ...req.body,
+    owner: req.user._id
+   }
 
    try{
-    await movieManager.create(req.body)
+    await movieManager.create(newMovie)
     res.redirect('/')
    }catch(err){
     console.log(err.message)
@@ -24,14 +29,12 @@ movieRouter.get('/movies/:movieId/details', async (req, res) => {
     try{
         let movie = await movieManager.getOne(movieId).lean()
     // const casts = await castManager.getByIds(movie.casts).lean()
-        res.render('details', {movie})
+        res.render('movie/details', {movie})
 } catch(error){
     console.log(error.message)
 }
     
 })
- 
-
 
 movieRouter.get('/search', async (req, res) => {
     const {title, genre, year} = req.query
@@ -39,7 +42,7 @@ movieRouter.get('/search', async (req, res) => {
         res.render('search', {movies, title, genre, year})
 })
 
-movieRouter.get('/movies/:movieId/attach', async(req, res) => {
+movieRouter.get('/movies/:movieId/attach', isAuth, async(req, res) => {
     const movie = await movieManager.getOne(req.params.movieId).lean()
     const casts = await castManager.getAll().lean()
 
@@ -47,7 +50,7 @@ movieRouter.get('/movies/:movieId/attach', async(req, res) => {
 
 })
 
-movieRouter.post('/movies/:movieId/attach', async(req, res) => {
+movieRouter.post('/movies/:movieId/attach', isAuth, async(req, res) => {
     const castId = req.body.cast
     await movieManager.attach(req.params.movieId, castId)
 
@@ -55,7 +58,7 @@ movieRouter.post('/movies/:movieId/attach', async(req, res) => {
    res.redirect(`/movies/${req.params.movieId}/attach`)
 })
 
-movieRouter.get('/movies/:movieId/edit', async (req, res) => {
+movieRouter.get('/movies/:movieId/edit', isAuth, async (req, res) => {
     if(!req.user){
         return res.redirect('/auth/login')
     }
